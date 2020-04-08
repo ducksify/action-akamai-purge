@@ -1,6 +1,9 @@
 # action.yml
 name: 'Akamai Purge'
-description: 'Purge content from the Akamai network directly from your github workflow'
+description: 'Purge content on the Akamai network from your Github workflow'
+branding:
+  icon: 'cloud-off'
+  color: 'gray-dark'
 inputs:
   type:
     description: 'Purge type (tags, cpcode)'
