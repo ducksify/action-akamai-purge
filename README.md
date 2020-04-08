@@ -36,7 +36,7 @@ CPCode or Cache Tag to purge
 ## Example usage
 
 ```YAML
-uses: actions/akamai-purge@master
+uses: ducksify/action-akamai-purge@1.1
 id: test
 env:
   EDGERC: ${{ secrets.EDGERC }}
