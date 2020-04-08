@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        uses: ./
+        id: test
+        env:
+          EDGERC: ${{ secrets.EDGERC }}
+        with:
+          type: 'tag'
+          ref: 'faketag'

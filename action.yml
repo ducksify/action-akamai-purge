@@ -1,0 +1,17 @@
+# action.yml
+name: 'Akamai Purge'
+description: 'Purge content from the Akamai network directly from your github workflow'
+inputs:
+  type:
+    description: 'Purge type (tags, cpcode)'
+    required: true
+    default: 'tags'
+  ref:
+    description: 'Reference'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.type }}
+    - ${{ inputs.ref }}
