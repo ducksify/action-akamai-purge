@@ -15,7 +15,7 @@ Consolidation of tools to trigger Akamai purge during deployment
 ## Example usage
 
 ```YAML
-uses: actions/akamai-purge@v1
+uses: actions/akamai-purge@master
 id: test
 env:
   EDGERC: ${{ secrets.EDGERC }}
