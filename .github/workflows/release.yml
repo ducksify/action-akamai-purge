@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Fetch tags/branches history
+        run: git fetch --prune --unshallow
+      - shell: bash
+        id: changelog
+        run: |
+          _TAG=$(echo "${{ github.ref }}" | sed "s|refs/tags/||g")
+          _PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+          _RELEASE_CHANGELOG="$(git log --pretty=format:"%h %s" ${_PREVIOUS_TAG}...${_TAG})"
+
+          # hack from https://github.community/t5/GitHub-Actions/set-output-Truncates-Multiline-Strings/td-p/37870
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//'%'/'%25'}"
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//$'\n'/'%0A'}"
+          _RELEASE_CHANGELOG="${_RELEASE_CHANGELOG//$'\r'/'%0D'}"
+
+          echo "::set-output name=RELEASE_CHANGELOG::$_RELEASE_CHANGELOG"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ### Changelog
+            ${{ steps.changelog.outputs.RELEASE_CHANGELOG }}
+          draft: false
+          prerelease: false
