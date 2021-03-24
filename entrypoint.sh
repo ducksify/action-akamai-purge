@@ -2,8 +2,15 @@
 set -e
 set -o pipefail
 
-_PURGE_TYPE=$1
-_PURGE_REF=$2
+_PURGE_COMMAND=$1
+_PURGE_TYPE=$2
+_PURGE_REF=$3
+
+if [[ ${_PURGE_COMMAND} != "delete" ]] && [[ ${_PURGE_COMMAND} != "invalidate" ]]
+then
+  echo "Unknown command '${_PURGE_COMMAND}' ... exiting"
+  exit 123
+fi
 
 case ${_PURGE_TYPE} in
   cpcode)
@@ -15,7 +22,7 @@ case ${_PURGE_TYPE} in
   ;;
 
   *)
-    echo "Unknown ${_PURGE_TYPE} ... exiting"
+    echo "Unknown type '${_PURGE_TYPE}' ... exiting"
     exit 123
   ;;
 esac
@@ -27,6 +34,5 @@ echo -e "${EDGERC}" > /root/.edgerc
 /usr/local/bin/purge \
   --edgerc /root/.edgerc \
   --section ccu \
-  delete \
+  ${_PURGE_COMMAND} \
   ${_CLI_OPT} "${_PURGE_REF}"
-

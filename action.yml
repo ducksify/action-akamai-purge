@@ -5,6 +5,9 @@ branding:
   icon: 'cloud-off'
   color: 'gray-dark'
 inputs:
+  command:
+    description: 'Purge command (delete, invalidate)'
+    required: true
   type:
     description: 'Purge type (tags, cpcode)'
     required: true
@@ -16,5 +19,6 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.command }}
     - ${{ inputs.type }}
     - ${{ inputs.ref }}

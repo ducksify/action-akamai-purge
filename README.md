@@ -22,6 +22,12 @@ Those values can be retrieved from your account on Akamai Control Center.
 
 ## Inputs
 
+### `command`
+**Required**
+Command to use for purge : 
+- delete : Delete content
+- invalidate : Invalidate content
+
 ### `type`
 **Required**
 Type of purge :
@@ -41,6 +47,7 @@ id: test
 env:
   EDGERC: ${{ secrets.EDGERC }}
 with:
+  command: 'delete'
   type: 'tag'
   ref: 'testtag'
 ```
