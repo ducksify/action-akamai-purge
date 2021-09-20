@@ -13,5 +13,6 @@ jobs:
         env:
           EDGERC: ${{ secrets.EDGERC }}
         with:
+          command: 'delete'
           type: 'tag'
           ref: 'faketag'
