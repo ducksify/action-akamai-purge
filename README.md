@@ -33,10 +33,11 @@ Command to use for purge :
 Type of purge :
 - cpcode : Purge by cpcode
 - tag : Purge by Cache Tag
+- url : Purge by URL
 
 ### `ref`
 **Required** 
-CPCode or Cache Tag to purge
+CPCode, URL, or Cache Tag to purge
 
 
 ## Example usage

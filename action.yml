@@ -9,7 +9,7 @@ inputs:
     description: 'Purge command (delete, invalidate)'
     required: true
   type:
-    description: 'Purge type (tags, cpcode)'
+    description: 'Purge type (tags, cpcode, urls)'
     required: true
     default: 'tags'
   ref:
