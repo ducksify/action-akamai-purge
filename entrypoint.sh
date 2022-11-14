@@ -21,6 +21,10 @@ case ${_PURGE_TYPE} in
     _CLI_OPT="--tag"
   ;;
 
+  url)
+    _CLI_OPT=""
+  ;;
+
   *)
     echo "Unknown type '${_PURGE_TYPE}' ... exiting"
     exit 123
