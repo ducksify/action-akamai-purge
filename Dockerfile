@@ -1,7 +1,7 @@
 FROM debian:10-slim
 ARG BUILD_DATE
 ARG VCS_REF
-ARG CLI_PURGE_RELEASE=1.0.1
+ARG CLI_PURGE_RELEASE=1.1.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
